@@ -1,0 +1,464 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: rgb(92, 7, 7);
+  background-image: url("images/tree-no-background.png");
+  background-size: 10%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+/* SNOW */
+
+.snow,
+.snow:after,
+.snow:before {
+  position: absolute;
+  height: 1900px;
+
+  top: -650px;
+  left: 0;
+  right: 0;
+  bottom: 0px;
+
+  background-image: radial-gradient(4px 4px at 100px 50px, #fff, transparent),
+    radial-gradient(6px 6px at 200px 150px, #fff, transparent),
+    radial-gradient(3px 3px at 300px 250px, #fff, transparent),
+    radial-gradient(4px 4px at 400px 350px, #fff, transparent),
+    radial-gradient(6px 6px at 500px 100px, #fff, transparent),
+    radial-gradient(3px 3px at 50px 200px, #fff, transparent),
+    radial-gradient(4px 4px at 150px 300px, #fff, transparent),
+    radial-gradient(6px 6px at 250px 400px, #fff, transparent),
+    radial-gradient(3px 3px at 350px 500px, #fff, transparent);
+  background-size: 650px 650px;
+
+  animation: snowFall 6s linear;
+  animation-iteration-count: infinite;
+}
+.snow:before {
+  margin-left: -350px;
+  opacity: 0.7;
+  filter: blur(1px);
+  animation-direction: reverse;
+  animation-duration: 12s;
+}
+.snow:after {
+  margin-left: -250px;
+  opacity: 0.5;
+  filter: blur(2px);
+  animation-direction: reverse;
+  animation-duration: 9s;
+}
+
+@keyframes snowFall {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(650px);
+  }
+}
+
+/* TREE */
+
+.container {
+  perspective: 1500px;
+  height: 700px;
+}
+.container * {
+  transform-style: preserve-3d;
+}
+
+.tree {
+  --width: 80vmin;
+  --gap: 1.5vmin;
+  --columns: 14;
+  width: var(--width);
+  aspect-ratio: 1;
+  display: grid;
+  grid-template-columns: repeat(var(--columns), 1fr);
+  gap: var(--gap);
+  --box-size: calc(
+    ((var(--width) - (var(--columns) - 1) * var(--gap)) / 14) * 2 + var(--gap)
+  );
+  counter-reset: days 0;
+  direction: rtl;
+
+  /* centering tree */
+  margin-top: 5%;
+  margin-bottom: 4%;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+
+.tree > .box {
+  grid-column: var(--gcs, auto) / span 2;
+  display: grid;
+  outline: 1px solid transparent;
+  counter-increment: days 1;
+}
+
+.tree > .box:nth-child(1) {
+  --gcs: 7;
+}
+.tree > .box:nth-child(2) {
+  --gcs: 6;
+}
+.tree > .box:nth-child(4) {
+  --gcs: 5;
+}
+.tree > .box:nth-child(7) {
+  --gcs: 4;
+}
+.tree > .box:nth-child(11) {
+  --gcs: 3;
+}
+.tree > .box:nth-child(16) {
+  --gcs: 2;
+}
+.tree > .box:nth-child(22) {
+  --gcs: 5;
+}
+
+/* sides */
+.tree > .box > p {
+  grid-area: 1/1;
+  display: grid;
+  background-color: var(--wrap);
+  --ribbon-grad: transparent 30%, var(--ribbon) 30% 37%, var(--wrap) 37% 38%,
+    var(--ribbon) 38% 62%, var(--wrap) 62% 63%, var(--ribbon) 63% 70%,
+    transparent 70%;
+  background-image: linear-gradient(var(--l1, transparent) 100%, transparent 0),
+    linear-gradient(90deg, var(--ribbon-grad)),
+    linear-gradient(0deg, var(--ribbon-grad)),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 3%,
+      rgb(0 0 0 / 0.125) 3% 5%,
+      transparent 5% 8%
+    );
+  --transform: rotateY(var(--ry, 0deg)) rotateX(var(--rx, 0deg))
+    translateZ(calc(var(--box-size) * 0.5));
+  transform: var(--transform);
+}
+
+.tree > .box > p:nth-child(2) {
+  --ry: 180deg;
+  --l2: 0.7;
+  --l1: rgb(0 0 0 / 0.25);
+} /* back */
+.tree > .box > p:nth-child(3) {
+  --ry: -90deg;
+  --l2: 0.5;
+  --l1: rgb(0 0 0 / 0.125);
+} /* left */
+.tree > .box > p:nth-child(4) {
+  --ry: 90deg;
+  --l2: 0.5;
+  --l1: rgb(255 255 255 / 0.125);
+} /* right */
+.tree > .box > p:nth-child(5) {
+  --rx: 90deg;
+  --l2: 0.6;
+  --l1: rgb(255 255 255 / 0.25);
+} /* top */
+.tree > .box > p:nth-child(6) {
+  --rx: -90deg;
+  --l2: 0.6;
+  --l1: rgb(0 0 0 / 0.25);
+} /* bottom */
+
+/* front */
+.tree > .box > p:nth-child(1) {
+  transform-origin: left;
+  transition: transform 500ms ease;
+  cursor: pointer;
+}
+.tree > .box:focus > p:nth-child(1) {
+  transform: var(--transform) rotateY(-90deg);
+}
+.tree > .box > p:nth-child(1)::after {
+  content: counter(days);
+  grid-area: 1/1;
+  place-self: center;
+
+  display: grid;
+  place-items: center;
+  width: 5vmin;
+  aspect-ratio: 1;
+  border-radius: 70%;
+  background-color: var(--wrap);
+
+  font-size: 3vmin;
+  font-family: system-ui, sans-serif;
+  color: rgb(198, 198, 77);
+  font-weight: bolder;
+}
+
+/* wrappings */
+.tree > .box:nth-child(1) {
+  --wrap: rgb(74, 141, 62);
+  --ribbon: rgb(200, 200, 76);
+}
+.tree > .box:nth-child(2) {
+  --wrap: rgb(65, 123, 55);
+}
+.tree > .box:nth-child(3) {
+  --wrap: rgb(65, 123, 55);
+  --ribbon: rgb(84, 191, 175);
+}
+.tree > .box:nth-child(4) {
+  --wrap: rgb(30, 103, 30);
+  --ribbon: rgb(208, 68, 26);
+}
+.tree > .box:nth-child(5) {
+  --wrap: rgb(30, 103, 30);
+}
+.tree > .box:nth-child(6) {
+  --wrap: rgb(30, 103, 30);
+}
+.tree > .box:nth-child(7) {
+  --wrap: rgb(17, 79, 17);
+}
+.tree > .box:nth-child(8) {
+  --wrap: rgb(17, 79, 17);
+}
+.tree > .box:nth-child(9) {
+  --wrap: rgb(17, 79, 17);
+  --ribbon: rgb(92, 87, 189);
+}
+.tree > .box:nth-child(10) {
+  --wrap: rgb(17, 79, 17);
+}
+.tree > .box:nth-child(11) {
+  --wrap: rgb(9, 79, 9);
+  --ribbon: rgb(91, 171, 159);
+}
+.tree > .box:nth-child(12) {
+  --wrap: rgb(9, 79, 9);
+}
+.tree > .box:nth-child(13) {
+  --wrap: rgb(9, 79, 9);
+  --ribbon: rgb(208, 68, 26);
+}
+.tree > .box:nth-child(14) {
+  --wrap: rgb(9, 79, 9);
+}
+.tree > .box:nth-child(15) {
+  --wrap: rgb(9, 79, 9);
+}
+.tree > .box:nth-child(16) {
+  --wrap: rgb(3, 67, 3);
+}
+.tree > .box:nth-child(17) {
+  --wrap: rgb(3, 67, 3);
+  --ribbon: rgb(196, 109, 209);
+}
+.tree > .box:nth-child(18) {
+  --wrap: rgb(3, 67, 3);
+}
+.tree > .box:nth-child(19) {
+  --wrap: rgb(3, 67, 3);
+}
+.tree > .box:nth-child(20) {
+  --wrap: rgb(3, 67, 3);
+  --ribbon: rgb(91, 171, 159);
+}
+.tree > .box:nth-child(21) {
+  --wrap: rgb(3, 67, 3);
+}
+.tree > .box:nth-child(22) {
+  --wrap: rgb(3, 67, 3);
+  --ribbon: rgb(110, 18, 18);
+}
+.tree > .box:nth-child(23) {
+  --wrap: rgb(3, 67, 3);
+  --ribbon: rgb(110, 18, 18);
+}
+.tree > .box:nth-child(24) {
+  --wrap: rgb(3, 67, 3);
+  --ribbon: rgb(110, 18, 18);
+}
+
+/* inside sides*/
+.tree > .box > p::before {
+  content: "";
+  grid-area: 1/1;
+  background-color: var(--wrap);
+  background-image: linear-gradient(
+    rgb(0 0 0 / var(--l2, 0.25)) 105%,
+    transparent
+  );
+  transform: translateZ(-0.1px);
+}
+
+/* content */
+.tree > .box::before {
+  content: "";
+  grid-area: 1/1;
+  place-self: center;
+  width: 75%;
+  aspect-ratio: 1;
+  background-image: var(--img);
+  background-size: contain;
+}
+
+/* animations */
+.tree > .box:focus::before {
+  animation: rotateContent 3s linear infinite;
+}
+@keyframes rotateContent {
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+/* contents */
+
+/* polar express */
+.tree > .box:nth-child(1) {
+  --img: url(https://cdn-icons-png.flaticon.com/512/1974/1974098.png);
+}
+.tree > .box:nth-child(2) {
+  --img: url(https://cdn-icons-png.flaticon.com/64/6278/6278695.png);
+}
+.tree > .box:nth-child(3) {
+  --img: url(https://cdn-icons-png.flaticon.com/64/2299/2299172.png);
+}
+.tree > .box:nth-child(4) {
+  --img: url(https://cdn-icons-png.flaticon.com/64/892/892848.png);
+}
+.tree > .box:nth-child(5) {
+  --img: url(https://cdn-icons-png.flaticon.com/64/6278/6278637.png);
+}
+.tree > .box:nth-child(6) {
+  --img: url(https://cdn-icons-png.flaticon.com/64/3132/3132705.png);
+}
+.tree > .box:nth-child(7) {
+  --img: url(https://cdn-icons-png.flaticon.com/64/614/614114.png);
+}
+.tree > .box:nth-child(8) {
+  --img: url(https://cdn-icons-png.flaticon.com/64/3753/3753480.png);
+}
+.tree > .box:nth-child(9) {
+  --img: url(https://cdn-icons-png.flaticon.com/64/2299/2299184.png);
+}
+.tree > .box:nth-child(10) {
+  --img: url(https://cdn-icons-png.flaticon.com/64/3694/3694954.png);
+}
+.tree > .box:nth-child(11) {
+  --img: url(https://cdn-icons-png.flaticon.com/64/595/595461.png);
+}
+.tree > .box:nth-child(12) {
+  --img: url(https://cdn-icons-png.flaticon.com/64/3760/3760868.png);
+}
+.tree > .box:nth-child(13) {
+  --img: url(https://cdn-icons-png.flaticon.com/64/3792/3792003.png);
+}
+.tree > .box:nth-child(14) {
+  --img: url(https://cdn-icons-png.flaticon.com/64/4122/4122334.png);
+}
+.tree > .box:nth-child(15) {
+  --img: url(https://cdn-icons-png.flaticon.com/64/2418/2418149.png);
+}
+.tree > .box:nth-child(16) {
+  --img: url(https://cdn-icons-png.flaticon.com/64/3737/3737935.png);
+}
+.tree > .box:nth-child(17) {
+  --img: url(https://cdn-icons-png.flaticon.com/64/837/837891.png);
+}
+.tree > .box:nth-child(18) {
+  --img: url(https://cdn-icons-png.flaticon.com/64/2299/2299189.png);
+}
+.tree > .box:nth-child(19) {
+  --img: url(https://cdn-icons-png.flaticon.com/64/2367/2367784.png);
+}
+.tree > .box:nth-child(20) {
+  --img: url(https://cdn-icons-png.flaticon.com/64/658/658342.png);
+}
+.tree > .box:nth-child(21) {
+  --img: url(https://cdn-icons-png.flaticon.com/64/290/290441.png);
+}
+.tree > .box:nth-child(22) {
+  --img: url(https://cdn-icons-png.flaticon.com/64/275/275688.png);
+}
+.tree > .box:nth-child(23) {
+  --img: url(https://cdn-icons-png.flaticon.com/64/614/614105.png);
+}
+.tree > .box:nth-child(24) {
+  --img: url(https://cdn-icons-png.flaticon.com/64/3706/3706292.png);
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 80px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #f1d4b3;
+  display: block;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 700px;
+
+  animation-name: zoom;
+  animation-duration: 0.6s;
+
+  padding-bottom: 5%;
+
+  overflow: auto;
+}
+
+@keyframes zoom {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .modal-content {
+    width: 100%;
+  }
+}
+
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
