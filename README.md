@@ -1,6 +1,6 @@
 # Christmas Movies Advent Calendar
 
-## Description
+## Website Description
 
 In the spirit of the Christmas holiday, this site presents an advent calendar that suggests a classic Christmas-themed movie to watch for each day of the month of December, leading up to Christmas. When clicking on a box on the advent calendar, users will be presented with a pop-up screen containing the information for the corresponding day's movie. This information includes the movie title, poster, release year, rating, a brief description, and the trailer. While suggesting classic Christmas movies to watch is the main goal of this site, sprinkled in between, for a few of the days, are fun and hands-on Christmas activity suggestions for users to participate in (either alone or with their family and friends) and take a break from the screen. The goal of including these activities is for users to also spend quality time with those whom they care about during this holiday season.
 
