@@ -71,10 +71,16 @@ body {
 
 .container {
   perspective: 1500px;
-  height: 700px;
+  height: 870px;
 }
 .container * {
   transform-style: preserve-3d;
+}
+
+@media only screen and (max-width: 1500px) {
+  .container {
+    padding-top: 7%;
+  }
 }
 
 .tree {
@@ -89,7 +95,8 @@ body {
   --box-size: calc(
     ((var(--width) - (var(--columns) - 1) * var(--gap)) / 14) * 2 + var(--gap)
   );
-  counter-reset: days 0;
+  /* counter-reset: days 0; */
+  counter-reset: days 25;
   direction: rtl;
 
   /* centering tree */
@@ -104,7 +111,8 @@ body {
   grid-column: var(--gcs, auto) / span 2;
   display: grid;
   outline: 1px solid transparent;
-  counter-increment: days 1;
+  /* counter-increment: days 1; */
+  counter-increment: days -1;
 }
 
 .tree > .box:nth-child(1) {
@@ -421,14 +429,12 @@ body {
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
-  max-width: 700px;
+  max-width: 1000px;
 
   animation-name: zoom;
   animation-duration: 0.6s;
 
-  padding-bottom: 5%;
-
-  overflow: auto;
+  overflow: hidden;
 }
 
 @keyframes zoom {
@@ -440,14 +446,15 @@ body {
   }
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 1000px) {
   .modal-content {
     width: 100%;
+    overflow: scroll;
   }
 }
 
 .close {
-  position: absolute;
+  position: fixed;
   top: 15px;
   right: 35px;
   color: #f1f1f1;
@@ -461,4 +468,93 @@ body {
   color: #000;
   text-decoration: none;
   cursor: pointer;
+}
+
+#modalMessage {
+  display: none;
+}
+
+#modalMovie {
+  display: none;
+}
+#poster {
+  float: right;
+  width: 300px;
+  position: relative;
+  padding: 1%;
+  padding-top: 3%;
+  margin-right: 2%;
+}
+#title,
+p,
+#description {
+  font-family: "Lucida Console", Courier, monospace;
+  color: rgb(18, 61, 42);
+  margin-left: 2%;
+}
+#title {
+  font-size: 65px;
+  word-spacing: -20px;
+  line-height: 0.9;
+}
+#year,
+#rate,
+#genre,
+#description {
+  font-size: larger;
+}
+#trailer {
+  margin-left: 2%;
+  width: 550px;
+  height: 350px;
+}
+
+#modalActivity {
+  display: none;
+  background-color: rgb(188, 232, 240);
+  font-family: Tahoma, sans-serif;
+  padding-top: 3%;
+  padding-bottom: 3%;
+  margin-bottom: 5%;
+
+  overflow: hidden;
+}
+#breakHeading {
+  text-align: center;
+  font-size: 45px;
+}
+#breakHeading2 {
+  text-align: center;
+  font-size: 30px;
+}
+#activityImage {
+  float: right;
+  width: 400px;
+  position: relative;
+  padding: 1%;
+  margin-top: 23%;
+  margin-right: 2%;
+  margin-left: 2%;
+}
+#breakDescription {
+  margin-left: 5%;
+  font-size: 22px;
+  color: #000;
+}
+
+.link {
+  text-decoration: none;
+  color: #000;
+  font-weight: bold;
+}
+.link:hover {
+  font-size: larger;
+  color: rgb(88, 19, 30);
+}
+
+/* MOVIES & ACTIVITIES */
+
+#movie,
+#notMovie {
+  display: none;
 }
