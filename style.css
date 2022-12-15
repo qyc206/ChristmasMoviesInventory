@@ -332,78 +332,77 @@ body {
 
 /* contents */
 
-/* polar express */
 .tree > .box:nth-child(1) {
-  --img: url(https://cdn-icons-png.flaticon.com/512/1974/1974098.png);
+  --img: url(images/acharliebrownchristmas.jpg);
 }
 .tree > .box:nth-child(2) {
-  --img: url(https://cdn-icons-png.flaticon.com/64/6278/6278695.png);
+  --img: url(images/mickeysonceuponachristmas.jpeg);
 }
 .tree > .box:nth-child(3) {
   --img: url(https://cdn-icons-png.flaticon.com/64/2299/2299172.png);
 }
 .tree > .box:nth-child(4) {
-  --img: url(https://cdn-icons-png.flaticon.com/64/892/892848.png);
+  --img: url(images/howthegrinchsstolechristmas.jpg);
 }
 .tree > .box:nth-child(5) {
-  --img: url(https://cdn-icons-png.flaticon.com/64/6278/6278637.png);
+  --img: url(images/themuppetchristmascarol.jpg);
 }
 .tree > .box:nth-child(6) {
-  --img: url(https://cdn-icons-png.flaticon.com/64/3132/3132705.png);
+  --img: url(images/elf.jpeg);
 }
 .tree > .box:nth-child(7) {
-  --img: url(https://cdn-icons-png.flaticon.com/64/614/614114.png);
+  --img: url(images/caspersfirstchristmas.jpeg);
 }
 .tree > .box:nth-child(8) {
-  --img: url(https://cdn-icons-png.flaticon.com/64/3753/3753480.png);
+  --img: url(images/achristmascarol.jpeg);
 }
 .tree > .box:nth-child(9) {
   --img: url(https://cdn-icons-png.flaticon.com/64/2299/2299184.png);
 }
 .tree > .box:nth-child(10) {
-  --img: url(https://cdn-icons-png.flaticon.com/64/3694/3694954.png);
+  --img: url(mages/thepolarexpress.jpg);
 }
 .tree > .box:nth-child(11) {
-  --img: url(https://cdn-icons-png.flaticon.com/64/595/595461.png);
+  --img: url(images/rudolphtherednnosedreindeer.jpeg);
 }
 .tree > .box:nth-child(12) {
-  --img: url(https://cdn-icons-png.flaticon.com/64/3760/3760868.png);
+  --img: url(images/miracleon34thstreet.jpeg);
 }
 .tree > .box:nth-child(13) {
-  --img: url(https://cdn-icons-png.flaticon.com/64/3792/3792003.png);
+  --img: url(images/loveactually.jpg);
 }
 .tree > .box:nth-child(14) {
-  --img: url(https://cdn-icons-png.flaticon.com/64/4122/4122334.png);
+  --img: url(images/batmanreturns.jpeg);
 }
 .tree > .box:nth-child(15) {
-  --img: url(https://cdn-icons-png.flaticon.com/64/2418/2418149.png);
+  --img: url(images/fredclaus.jpg);
 }
 .tree > .box:nth-child(16) {
-  --img: url(https://cdn-icons-png.flaticon.com/64/3737/3737935.png);
+  --img: url(images/achristmasstory.jpg);
 }
 .tree > .box:nth-child(17) {
-  --img: url(https://cdn-icons-png.flaticon.com/64/837/837891.png);
+  --img: url(images/christmaswiththekranks.jpg);
 }
 .tree > .box:nth-child(18) {
-  --img: url(https://cdn-icons-png.flaticon.com/64/2299/2299189.png);
+  --img: url(images/nationallampoonschristmasvacation.jpeg);
 }
 .tree > .box:nth-child(19) {
-  --img: url(https://cdn-icons-png.flaticon.com/64/2367/2367784.png);
+  --img: url(images/thesantaclause.jpg);
 }
 .tree > .box:nth-child(20) {
-  --img: url(https://cdn-icons-png.flaticon.com/64/658/658342.png);
+  --img: url(images/chroniclesofnarnia.jpg);
 }
 .tree > .box:nth-child(21) {
   --img: url(https://cdn-icons-png.flaticon.com/64/290/290441.png);
 }
 .tree > .box:nth-child(22) {
-  --img: url(https://cdn-icons-png.flaticon.com/64/275/275688.png);
+  --img: url(images/nightmarebeforechristmas.jpg);
 }
 .tree > .box:nth-child(23) {
   --img: url(https://cdn-icons-png.flaticon.com/64/614/614105.png);
 }
 .tree > .box:nth-child(24) {
-  --img: url(https://cdn-icons-png.flaticon.com/64/3706/3706292.png);
+  --img: url(images/homealone.jpeg);
 }
 
 /* The Modal (background) */
@@ -557,4 +556,40 @@ p,
 #movie,
 #notMovie {
   display: none;
+}
+
+/* PAGE LOADER */
+
+#loader {
+  border: 12px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 12px solid #444444;
+  width: 70px;
+  height: 70px;
+  animation: spin 1s linear infinite;
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#loaderText {
+  color: white;
+  font-size: x-large;
+  font-weight: bold;
+  width: 100px;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
