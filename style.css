@@ -508,6 +508,14 @@ p,
   height: 350px;
 }
 
+#modalMovie {
+  display: none;
+  padding-top: 3%;
+  padding-bottom: 3%;
+  margin-bottom: 5%;
+
+  overflow: hidden;
+}
 #modalActivity {
   display: none;
   background-color: rgb(188, 232, 240);
